@@ -94,6 +94,42 @@ SELECT * FROM customer ORDER BY custname DESC;
 -- SELECT * FROM customer ORDER BY addr DESC WHERE birth >= '2000-01-01'; -- 실행순서가 잘못됨
 SELECT * FROM customer WHERE birth >= '2000-01-01' ORDER BY addr DESC ;
 
+SELECT * FROM customer WHERE birth >= '2000-01-01' ORDER BY custid DESC, addr DESC;
 
+-- ORDER BY 뒤에 여러 개의 속성을 줄 수 있음
+-- 아래 두 퀴리문의 결과는 상이함alter
+SELECT * FROM orders ORDER BY price, amount;
+SELECT * FROM orders ORDER BY amount, price;
 
+-- < LIMIT >
+-- LIMIT 형식 : LIMIT 시작, 개수 == LIMIT 개수 OFFSET 시작
+-- LIMIT 에서 시작은 0
+-- 고객 테이블 전체 정보를 조회하는데, 앞에 2건만 조회하고 싶은 경우
+SELECT * FROM customer LIMIT 2;
+SELECT * FROM customer LIMIT 0, 2;
 
+-- 고객 테이블 전체 정보를 조회하는데, 두번째부터 여섯번째 행만 조회하고 싶은 경우
+SELECT * FROM customer LIMIT 1, 5;
+SELECT * FROM customer LIMIT 5 OFFSET 1;
+
+-- 2000년 이후 출생 고객 중에서 앞에 2건만 조회하고 싶은 경우
+SELECT * FROM customer WHERE birth > '2000-12-31' LIMIT 2;
+
+-- 2000년 이후 출생 고객 중에서 앞에 2건만 조회하고 싶은 경우
+SELECT * FROM customer WHERE birth > '2000-12-31' ORDER BY custid DESC LIMIT 2;
+
+-- 실습.
+-- 1.
+SELECT * FROM user ORDER BY birthday;
+-- 2.
+SELECT * FROM user WHERE gender='M'ORDER BY Name DESC;
+-- 3.
+SELECT Id, Name FROM user WHERE birthday>'1989-12-31'AND birthday<'2000-01-01';
+-- 4.
+SELECT * FROM user WHERE birthday LIKE'%-06%'ORDER BY birthday;
+-- 5.
+SELECT * FROM user WHERE gender='M' AND birthday LIKE'197%';
+-- 6.
+SELECT * FROM user ORDER BY age DESC LIMIT 3;
+-- 7.
+SELECT * FROM user WHERE age >=25 AND age <= 50;
