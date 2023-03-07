@@ -80,5 +80,20 @@ SELECT * FROM customer WHERE addr LIKE '미국%' OR addr LIKE '영국%';
 SELECT * FROM customer WHERE phone NOT LIKE '%4';
 
 -- < ORDER BY >
--- ORDER BY 
+-- ORDER BY 절을 사용하지 않는 경우, pk 기준으로 정렬
+SELECT * FROM customer;
+
+-- custname 속성을 기준으로 "오름차순" 정렬
+SELECT * FROM customer ORDER BY custname;
+
+-- custname 속성을 기준으로 "내림차순" 정렬
+SELECT * FROM customer ORDER BY custname DESC;
+
+-- order by & where 함께 사용
+-- 2000년 이후 출생자 중에서 주소를 기준으로 내림차순 검색
+-- SELECT * FROM customer ORDER BY addr DESC WHERE birth >= '2000-01-01'; -- 실행순서가 잘못됨
+SELECT * FROM customer WHERE birth >= '2000-01-01' ORDER BY addr DESC ;
+
+
+
 
