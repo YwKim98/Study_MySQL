@@ -118,18 +118,14 @@ SELECT * FROM customer WHERE birth > '2000-12-31' LIMIT 2;
 -- 2000년 이후 출생 고객 중에서 앞에 2건만 조회하고 싶은 경우
 SELECT * FROM customer WHERE birth > '2000-12-31' ORDER BY custid DESC LIMIT 2;
 
--- 실습.
--- 1.
-SELECT * FROM user ORDER BY birthday;
--- 2.
-SELECT * FROM user WHERE gender='M'ORDER BY Name DESC;
--- 3.
-SELECT Id, Name FROM user WHERE birthday>'1989-12-31'AND birthday<'2000-01-01';
--- 4.
-SELECT * FROM user WHERE birthday LIKE'%-06%'ORDER BY birthday;
--- 5.
-SELECT * FROM user WHERE gender='M' AND birthday LIKE'197%';
--- 6.
-SELECT * FROM user ORDER BY age DESC LIMIT 3;
--- 7.
-SELECT * FROM user WHERE age >=25 AND age <= 50;
+DESC customer; -- 테이블 정보 확인
+-- < IS NULL >
+-- 고객 테이블에서 연락처가 존재하지 않는 고객 조회
+SELECT * FROM customer WHERE phone IS NULL;
+SELECT * FROM customer WHERE birth IS NULL;
+SELECT * FROM customer WHERE phone IS NULL AND birth IS NULL;
+
+-- 고객 테이블에서 연락처가 존재하는 고객 조회
+SELECT * FROM customer WHERE phone IS NOT NULL;
+
+
