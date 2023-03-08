@@ -119,6 +119,7 @@ SELECT * FROM customer WHERE birth > '2000-12-31' LIMIT 2;
 SELECT * FROM customer WHERE birth > '2000-12-31' ORDER BY custid DESC LIMIT 2;
 
 DESC customer; -- 테이블 정보 확인
+
 -- < IS NULL >
 -- 고객 테이블에서 연락처가 존재하지 않는 고객 조회
 SELECT * FROM customer WHERE phone IS NULL;
@@ -127,5 +128,39 @@ SELECT * FROM customer WHERE phone IS NULL AND birth IS NULL;
 
 -- 고객 테이블에서 연락처가 존재하는 고객 조회
 SELECT * FROM customer WHERE phone IS NOT NULL;
+SELECT * FROM customer;
 
+-- < 집계 함수 >
+-- SUM, AVG, MIN, MAX, COUNT
+-- 주문 테이블에서 총 주문 건수 조회 (== 투플 개수)
+-- COUNT(*) : 모든 행의 개수를 카운트
+-- COUNT(1),COUNT(*) 둘다 동일하게 작동되지만 가독성을 위해 1보다 *을 권장
+SELECT COUNT(*) FROM orders;
+SELECT COUNT(orderid) FROM orders;
+
+SELECT COUNT(*) FROM customer; -- 11
+SELECT COUNT(custname) FROM customer; -- 11
+SELECT COUNT(phone) FROM customer; -- 10
+SELECT COUNT(birth) FROM customer; -- 9
+
+-- 주문 테이블에서 총 판매 개수 검색
+SELECT SUM(amount) FROM orders;
+-- AS 열 이름 변경
+SELECT SUM(amount) AS total_amount FROM orders;
+SELECT SUM(amount) AS 'total_amount' FROM orders;
+SELECT SUM(amount) AS 총판매개수 FROM orders;
+SELECT SUM(amount) AS '총 판매 개수' FROM orders;
+
+-- 주문 테이블에서 총 판매 개수, 평균 판매 개수, 상품 최저가, 상품 최고가 검색
+-- 총 판매 개수 : SUM()
+-- 평균 판매 개수 : AVG()
+-- 상품 최저가 : MIN()
+-- 상품 최고가 : MAX()
+SELECT SUM(amount) AS '총 판매 개수',
+       AVG(amount) AS '평균 판매 개수',
+       MIN(price) AS '상품 최저가',
+       MAX(price) AS '상품 최고가' 
+       FROM orders;
+       
+       
 
