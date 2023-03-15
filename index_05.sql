@@ -43,7 +43,32 @@ SELECT orderid, custid, prodname FROM orders
 	WHERE price * amount = (SELECT MAX(price * amount) FROM orders);
 -- 주문 이력이 있는 고객 조회
 SELECT custname FROM customer WHERE custid IN (SELECT custid FROM orders);
-    
+
+USE bookstore;
+SELECT * FROM authors;
+SELECT * FROM books;
+-- books 테이블 데이터 추가
+-- 책아이디 : 5
+-- 제목 : Lucky Day
+-- 작가아이디 : NULL
+-- 출판일자 : 2023-03-01
+INSERT INTO books VALUES (5, 'Lucky Day', NULL, '2023-03-01');
+
+-- INNER JOIN (books, authors)
+SELECT * FROM books INNER JOIN authors ON books.author_id = authors.author_id;
+-- books 테이블에 author_id가 NULL이었던 행은 제외되고 출력
+
+-- LEFT JOIN (books, authors)
+SELECT * FROM books LEFT JOIN authors ON books.author_id = authors.author_id;
+-- books 테이블에 author_id가 NULL인 행이 있더라도 출력
+SELECT * FROM authors LEFT JOIN books ON books.author_id = authors.author_id;
+-- LEFT JOIN 에는 순서가 존재함을 보여주는 예시
+
+
+
+
+
+
 
 
 
