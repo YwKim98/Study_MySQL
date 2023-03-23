@@ -24,13 +24,14 @@ INSERT INTO new_customer VALUES
     ('dfgh', '이재은', '미국 뉴욕', '01033331237', '2004-06-07');
     
 -- < UPDATE >
-UPDATE new_customer SET addr = '대한민국 서울' WHERE custid = 'apple';
+UPDATE new_customer SET custid = 'kiwi' WHERE custid = 'dfgh';
 UPDATE new_customer SET addr = '대한민국 서울' WHERE custid LIKE '%y';
 
-SET sql_safe_updates=0;
+SET sql_safe_updates = 0;
 
 -- < DELETE >
 -- 외래키 연쇄삭제
+DELETE FROM new_customer WHERE phone = '01012344321';
 DELETE FROM new_customer WHERE custid = 'kiwi';
 
 SELECT * FROM new_customer;
